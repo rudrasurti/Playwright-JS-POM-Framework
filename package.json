@@ -1,0 +1,20 @@
+{
+  "name": "Playwright-POM-Frmework-JS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Rudra Surti",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.29.2",
+    "jest": "^29.4.1"
+  },
+  "dependencies": {
+    "playwright": "^1.32.3",
+    "underscore": "^1.13.6",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  }
+}
