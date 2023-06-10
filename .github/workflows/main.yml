@@ -22,12 +22,7 @@ jobs:
      
       - name: Install Playwright Browsers
         run: npx playwright install
-     
-      - name: Set up environment variables
-        run: |
-          echo "PLAYWRIGHT_VIDEO=record" >> $GITHUB_ENV
-          echo "PLAYWRIGHT_VIDEO_DIR=${{ github.workspace }}/playwright-video" >> $GITHUB_ENV
-     
+         
       - name: Run Playwright tests
         run: npx playwright test
     
