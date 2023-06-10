@@ -4,6 +4,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,8 +23,19 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
      
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Playwright tests with Video Recording
+        run: npx playwright test --video=on
+        env:
+          PLAYWRIGHT_VIDEO_DIR: ${{ github.workspace }}/playwright-video
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install ffmpeg
+     
+      - name: Convert video to MP4
+        run: |
+          ffmpeg -y -i ${{ github.workspace }}/playwright-video/video.webm -c:v libx264 -preset medium -c:a aac -b:a 128k -pix_fmt yuv420p ${{ github.workspace }}/playwright-video/video.mp4
      
       - uses: actions/upload-artifact@v3
         if: always()
@@ -37,4 +49,11 @@ jobs:
         with:    
           name: test-results
           path: test-results/
+          retention-days: 30
+          
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:    
+          name: playwright-video
+          path: playwright-video/
           retention-days: 30
