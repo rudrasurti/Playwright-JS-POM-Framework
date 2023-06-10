@@ -30,16 +30,7 @@ jobs:
      
       - name: Run Playwright tests
         run: npx playwright test
-     
-      - name: Install FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install ffmpeg
-     
-      - name: Convert video to MP4
-        run: |
-          ffmpeg -y -i ${{ github.workspace }}/playwright-video/video.webm -c:v libx264 -preset medium -c:a aac -b:a 128k -pix_fmt yuv420p ${{ github.workspace }}/playwright-video/video.mp4
-     
+    
       - uses: actions/upload-artifact@v3
         if: always()
         with:
